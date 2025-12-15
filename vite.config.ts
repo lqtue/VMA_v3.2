@@ -4,25 +4,8 @@ import { defineConfig } from 'vite';
 export default defineConfig({
 	plugins: [sveltekit()],
 	build: {
-		// Optimize for production
-		minify: 'terser',
-		terserOptions: {
-			compress: {
-				drop_console: true,
-				drop_debugger: true
-			}
-		},
-		// Code splitting for better caching
-		rollupOptions: {
-			output: {
-				manualChunks: {
-					// Vendor chunks for better caching
-					'openlayers': ['ol'],
-					'svelte': ['svelte'],
-					'allmaps': ['@allmaps/openlayers', '@allmaps/maplibre']
-				}
-			}
-		},
+		// Optimize for production with esbuild (faster than terser)
+		minify: 'esbuild',
 		// Asset size limits
 		chunkSizeWarningLimit: 1000,
 		// Source maps for debugging (smaller inline maps)
